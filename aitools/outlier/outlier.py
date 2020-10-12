@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def chebyshev_inequality(series, k: float = 3, return_thresholds=False, reverse_result=False):
+def chebyshev_inequality(series, k: float = 3, return_thresholds=False, reverse_result=False, print=True):
     """
     切比雪夫不等式，对任何分布形状的数据都适用。
     Return a boolean mask of outliers for a series
@@ -18,6 +18,8 @@ def chebyshev_inequality(series, k: float = 3, return_thresholds=False, reverse_
     mu, sigma = np.mean(series), np.std(series)
     cut_off = sigma * k
     lower, upper = mu - cut_off, mu + cut_off
+    if print:
+        display('lower :{} upper :{} mean :{} sigma :{}'.format(lower, upper, mu, sigma))
     res = [not reverse_result if x < lower or x > upper else reverse_result for x in series]
     if return_thresholds:
         return res, lower, upper
