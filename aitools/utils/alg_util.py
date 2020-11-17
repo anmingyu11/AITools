@@ -1,3 +1,6 @@
+import itertools
+
+
 def check_if_sorted(lst: list):
     return sorted(lst) == lst or sorted(lst, reverse=True) == lst
 
@@ -19,5 +22,10 @@ def is_subset_equal(set1, set2):
     set2 = set(set2)
     return set1.issubset(set2) or set1 == set2
 
-def pair_iter_list(l):
-    return list(zip(l[:-1],l[1:]))
+
+def pair_iter_list(ls):
+    return list(zip(ls[:-1], ls[1:]))
+
+
+def cartesian(x, y):
+    return list(itertools.product(x, y))
