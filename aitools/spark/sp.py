@@ -6,3 +6,7 @@ def rename_columns(df, columns):
         df = df.withColumnRenamed(old_name, new_name)
 
     return df
+
+
+def word_count(rdd):
+    return rdd.map(lambda x : (x,1)).reduceByKey(lambda a, b : a + b)
