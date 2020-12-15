@@ -1,3 +1,6 @@
+hdfs_dir_size = 'hadoop fs -du -s -h $path'
+
+
 def file_down(host, user_name, local_path, hdfs_path):
     print("file download from {} to {} start ......".format(hdfs_path, local_path))
     fs = pyhdfs.HdfsClient(hosts=host, user_name=user_name)
@@ -19,6 +22,12 @@ def download_hdfs_csv(hdfs_path, local_path, prefix='part'):
                 local_path=local_csv_path,
                 hdfs_path=hdfs_path + item
             )
+
+
+def remove_dir(client, path):
+    fs = pyhdfs.HdfsClient(client)
+    fs.delete(path)
+
 
 class PackageHdfs():
 
