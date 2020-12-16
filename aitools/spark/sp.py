@@ -9,4 +9,11 @@ def rename_columns(df, columns):
 
 
 def word_count(rdd):
-    return rdd.map(lambda x : (x,1)).reduceByKey(lambda a, b : a + b)
+    return rdd.map(lambda x: (x, 1)).reduceByKey(lambda a, b: a + b)
+
+
+def get_partitions(sql, table_name):
+    partitions = sql('show partitions {}'.format(table_name)).collect()
+    partitions = [pt['partition'] for pt in partitions]
+    partitions = [pt.split('=')[1] for pt in partitions]
+    return partitions
