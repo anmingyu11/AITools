@@ -17,3 +17,16 @@ def get_partitions(sql, table_name):
     partitions = [pt['partition'] for pt in partitions]
     partitions = [pt.split('=')[1] for pt in partitions]
     return partitions
+
+
+def get_partitions2(tb):
+    partitions = f.sql('show partitions {}'.format(tb)).collect()
+    partitions = [pt['partition'] for pt in partitions]
+    partitions = [pt.split('=')[1] for pt in partitions]
+    partitions = sorted(partitions)
+    partitions.reverse()
+    return partitions
+
+
+def show_null(df):
+    df.select(*(functions.sum(functions.col(c).isNull().cast("int")).alias(c) for c in df.columns)).show()
