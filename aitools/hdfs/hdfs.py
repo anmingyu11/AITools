@@ -32,7 +32,25 @@ def remove_dir(client, path):
 class PackageHdfs():
 
     def __init__(self):
-        self.fs = pyhdfs.HdfsClient('192.168.200.19:50070')
+        self.fs = pyhdfs.HdfsClient('127.0.0.1:50070')
+
+    def list(self,path):
+        fs = self.fs
+        return fs.list(path)
+
+    def exists(self,path):
+        fs = self.fs
+        return fs.exists(path)
+
+    def remove_path(path):
+        display('path : {} exists : {}'.format(path, self.exists(path)))
+        display('remove if exists')
+        if self.exists(path):
+            display('removing...')
+            self.remove_dir(path,recursive=True)
+        display('path : {} exists : {}'.format(edge_dt_path, self.exists(path)))
+        if self.exists(path):
+            raise
 
     # 删除
     def delFile(self, path):
