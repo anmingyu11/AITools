@@ -30,3 +30,11 @@ def get_partitions2(tb):
 
 def show_null(df):
     df.select(*(functions.sum(functions.col(c).isNull().cast("int")).alias(c) for c in df.columns)).show()
+
+def table_exists(tb):
+    return f.sql("SHOW TABLES LIKE '{}'".format(tb)).count() == 1
+
+def split_vector(df,vec_col_name):
+    df\
+        .withColumn("vecs", vector_to_array(vec_col_name))\
+        .select(["word"] + [col("vecs")[i] for i in range(3)])
