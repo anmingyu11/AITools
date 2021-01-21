@@ -5,6 +5,7 @@ from datetime import date
 
 import datetime
 
+
 class Timer():
 
     def __init__(self):
@@ -13,6 +14,9 @@ class Timer():
         self.elapse = None
 
     def now(self):
+        return datetime.datetime.now()
+
+    def get_now(self):
         return arrow.now().format('YYYY-MM-DD hh:mm')
 
     def elapse_time(self, unit='minute'):
@@ -28,6 +32,7 @@ class Timer():
             return self.elapse.seconds / 60
         else:
             return self.elapse.seconds / 3600
+
 
 def days_between(d1, d2):
     delta = d1 - d2
