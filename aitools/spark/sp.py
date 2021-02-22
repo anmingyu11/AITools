@@ -38,3 +38,9 @@ def split_vector(df,vec_col_name):
     df\
         .withColumn("vecs", vector_to_array(vec_col_name))\
         .select(["word"] + [col("vecs")[i] for i in range(3)])
+
+def alter_partition(table_name, dt):
+    partitions = load_partitions(table_name)
+    if dt in partitions:
+        display('dt has exists')
+        f.sql("alter table {} drop if exists partition (dt='{}')".format(table_name, dt))
