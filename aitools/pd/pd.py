@@ -105,3 +105,10 @@ def reduce_mem_usage(df):
     print('Decreased by {:.1f}%'.format(100 * (start_mem - end_mem) / start_mem))
 
     return df
+
+def show_quantile(x):
+    ranges = np.arange(0.01, 1, 0.01)
+    foo = [(round(r,2),np.quantile(x,r)) for r in ranges]
+    display(pd.DataFrame(foo))
+    for r,e in foo:
+        display('{} : {}'.format(r,e))
