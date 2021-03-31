@@ -29,3 +29,9 @@ def pair_iter_list(ls):
 
 def cartesian(x, y):
     return list(itertools.product(x, y))
+
+
+# [1,2], [3,4]
+# --> [1,3,2,4]
+def chain_ziplist(x, y):
+    return list(itertools.chain.from_iterable(list(zip(x, y))))
